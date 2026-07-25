@@ -7,6 +7,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     HF_HUB_DISABLE_SYMLINKS_WARNING=1
 
 COPY requirements.txt .
+# Instala o torch CPU-only antes do resto: sem isso, o pip puxa a build com
+# CUDA (vários GB de pacotes nvidia-*) mesmo rodando só em CPU na nuvem.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY agente/ agente/
