@@ -1,0 +1,8 @@
+# Ambiente
+.env
+.venv/
+__pycache__/
+*.pyc
+
+# Base vetorial gerada localmente
+vectorstore/
