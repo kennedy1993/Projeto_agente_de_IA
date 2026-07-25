@@ -3,6 +3,10 @@
 Agente de IA que tira dúvidas de clientes (reembolso, garantia, envio, pagamentos,
 programa de afiliados) com base nas políticas oficiais em `fonte_de_dados/`.
 
+**Em produção**: https://bi-97edfdad1c8640a39a92b593a43283e8.ecs.us-east-1.on.aws
+(AWS ECS Express Mode — veja [deploy/README.md](deploy/README.md) para o guia
+completo de deploy e como atualizar).
+
 ## Arquitetura
 
 RAG simples e local:
