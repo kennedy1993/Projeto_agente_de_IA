@@ -1,0 +1,9 @@
+services:
+  agente:
+    build: .
+    container_name: bimbambuy-agente
+    env_file:
+      - .env
+    ports:
+      - "8080:8000"
+    restart: unless-stopped

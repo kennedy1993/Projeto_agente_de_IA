@@ -27,15 +27,34 @@ pip install -r requirements.txt
 Copie `.env.example` para `.env` e preencha `GROQ_API_KEY` com uma chave de
 https://console.groq.com.
 
-## Uso
+## Uso (local, sem Docker)
 
 ```
 # 1. Gerar o índice a partir dos PDFs (rodar de novo sempre que os PDFs mudarem)
 python -m agente.ingest
 
-# 2. Conversar com o agente no terminal
+# 2a. Conversar com o agente no terminal
 python -m agente.chat_cli
+
+# 2b. Ou subir a interface web (http://localhost:8000)
+uvicorn agente.api:app --reload
 ```
+
+## Uso com Docker
+
+O índice vetorial é gerado durante o `docker build` (a base de conhecimento é
+estática), então o container sobe já pronto para responder.
+
+```
+docker compose up -d --build
+```
+
+Interface web em http://localhost:8080. O `docker-compose.yml` lê a
+`GROQ_API_KEY` do arquivo `.env` local (nunca é copiada para dentro da imagem —
+veja `.dockerignore`).
+
+Se mudar algum PDF em `fonte_de_dados/`, rode `docker compose up -d --build`
+de novo para regerar o índice.
 
 ## Limitações conhecidas
 

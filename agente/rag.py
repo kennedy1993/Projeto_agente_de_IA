@@ -77,9 +77,13 @@ def _build_messages(query: str, contexto: list[dict], historico: list[dict]) -> 
     return messages
 
 
+def warmup() -> None:
+    _load()
+
+
 def ask(query: str, historico: list[dict] | None = None) -> tuple[str, list[dict]]:
     _load()
-    historico = historico or []
+    historico = (historico or [])[-6:]
 
     contexto = retrieve(query)
     relevante = [c for c in contexto if c["score"] >= config.MIN_SIMILARITY]
